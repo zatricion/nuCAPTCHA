@@ -1,6 +1,11 @@
 Flask==0.9
 Jinja2==2.7
 MarkupSafe==0.18
+WTForms==1.0.4
 Werkzeug==0.9.1
+flask-peewee==0.6.5
 itsdangerous==0.21
+peewee==2.1.2
+psycopg2==2.5
 wsgiref==0.1.2
+wtf-peewee==0.2.2
