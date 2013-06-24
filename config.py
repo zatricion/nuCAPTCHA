@@ -4,14 +4,12 @@ class Configuration(object):
     
     if 'RDS_HOSTNAME' in os.environ:
         DATABASE = {
-            'default': {
-                'ENGINE': 'peewee.MySQLDatabase',
-                'NAME': os.environ['RDS_DB_NAME'],
-                'USER': os.environ['RDS_USERNAME'],
-                'PASSWORD': os.environ['RDS_PASSWORD'],
-                'HOST': os.environ['RDS_HOSTNAME'],
-                'PORT': os.environ['RDS_PORT'],
-            }
+          'engine': 'peewee.MySQLDatabase',
+          'name': os.environ['RDS_DB_NAME'],
+          'user': os.environ['RDS_USERNAME'],
+          'password': os.environ['RDS_PASSWORD'],
+          'host': os.environ['RDS_HOSTNAME'],
+          'port': os.environ['RDS_PORT'],
         }
     else:
       DATABASE = {
@@ -21,4 +19,3 @@ class Configuration(object):
         'host': 'localhost'
       }
     DEBUG = False
-    HOST = '0.0.0.0'
