@@ -1,10 +1,9 @@
 import flask
  
-from app import app as application
+from app import application
 
 #Set application.debug=true to enable tracebacks on Beanstalk log output. 
 #Make sure to remove this line before deploying to production.
-application.debug=True
  
 @application.route('/')
 def hello_world():

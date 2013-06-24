@@ -6,7 +6,7 @@ blueprints here too.
 then when you want to run your app, you point to main.py or `main.app`
 """
 from app import db
-from app import app as application
+from app import application as app
 
 from auth import *
 from admin import admin

@@ -4,7 +4,7 @@ views imports app, auth, and models, but none of these import views
 from flask import render_template, json, jsonify, send_file, request
 import random
 
-from app import app
+from app import application as app
 from auth import auth
 from models import *
 
