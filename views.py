@@ -8,7 +8,7 @@ from app import app
 from auth import auth
 from models import *
 
-DOMAIN =  'nucaptcha.us' #'localhost:5000/' #'nucaptcha.us'
+DOMAIN =  'nucaptcha.us/' #'localhost:5000/' #'nucaptcha.us'
 IM_DOMAIN = 'http://' + DOMAIN
 IM_COUNT = 2 # TODO: change to database query
 SEC_DOMAIN = 'http://' + DOMAIN
