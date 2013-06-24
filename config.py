@@ -20,5 +20,5 @@ class Configuration(object):
         'user': 'root',
         'host': 'localhost'
       }
-    DEBUG = True
+    DEBUG = False
     SECRET_KEY = 'shhhh'

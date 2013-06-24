@@ -22,4 +22,4 @@ SEC_DIR = 'secondary/'
 ###
 if __name__ == '__main__':
     setup.initialize(IM_DIR, SEC_DIR)
-    app.run()
+    app.run(host='0.0.0.0')
