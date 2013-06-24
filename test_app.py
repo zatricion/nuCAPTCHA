@@ -8,6 +8,6 @@ from app import application
 @application.route('/')
 def hello_world():
     return "Hello world!"
- 
-if __name__ == '__main__':
-    application.run(debug=True)
+#  
+# if __name__ == '__main__':
+#     application.run(debug=True)
