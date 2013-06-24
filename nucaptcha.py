@@ -12,9 +12,14 @@ from admin import admin
 # from api import api
 from models import *
 from views import *
+from scripts import setup
 
 admin.setup()
 # api.setup()
 
+IM_DIR = 'images/'
+SEC_DIR = 'secondary/'
+###
 if __name__ == '__main__':
+    setup.initialize(IM_DIR, SEC_DIR)
     app.run()

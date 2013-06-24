@@ -20,19 +20,16 @@ class User(db.Model, BaseUser):
         return self.username
 
 class Image(db.Model):
-    filename = CharField()
+    filename = CharField(unique=True)
     answer   = CharField()
     
 class Secondary(db.Model):
-    filename = CharField()
+    filename = CharField(unique=True)
 
 class SecCounts(db.Model):
     sec = ForeignKeyField(Secondary, related_name = 'counts')
     pos_count  = IntegerField()
     neg_count  = IntegerField()
     neut_count = IntegerField()
-    known      = BooleanField(default=False)
+    known      = BooleanField(index=True, default=False)
     
-
-# class KnownSecondaries(db.Model):
-#     pass
