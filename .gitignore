@@ -1,0 +1,8 @@
+.elasticbeanstalk/
+.DS_Store
+.Python
+*.pyc
+bin/
+include/
+lib/
+old.ebextensions/
