@@ -21,4 +21,4 @@ class Configuration(object):
         'host': 'localhost'
       }
     DEBUG = False
-    SECRET_KEY = 'shhhh'
+    HOST = '0.0.0.0'
