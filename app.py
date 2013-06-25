@@ -12,4 +12,9 @@ db = Database(app)
 
 # Here I would set up the cache, a task queue, etc.
 
-execfile("nucaptcha.py")
+
+@application.route('/')
+def hello_world():
+    return "Hello world! %s"
+    
+#execfile("nucaptcha.py")
