@@ -1,7 +1,7 @@
 import flask
  
-from app import application
-
+#from app import application
+application = flask.Flask(__name__)
 #Set application.debug=true to enable tracebacks on Beanstalk log output. 
 #Make sure to remove this line before deploying to production.
  
