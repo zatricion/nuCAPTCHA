@@ -9,8 +9,6 @@ from flask import Flask
 
 application = Flask(__name__) # had to call it application for elastic beanstalk
 
-from app import db
-
 from auth import *
 from admin import admin
 # from api import api
@@ -18,7 +16,7 @@ from models import *
 from views import *
 from scripts import setup
 
-admin.setup()
+#admin.setup()
 # api.setup()
 
 IM_DIR = 'images/'
