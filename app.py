@@ -13,7 +13,7 @@ db = Database(app)
 # Here I would set up the cache, a task queue, etc.
 
 
-@application.route('/')
+@app.route('/')
 def hello_world():
     return "Hello world! %s"
     
