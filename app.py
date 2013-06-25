@@ -5,7 +5,7 @@ from flask_peewee.db import Database
 
 application = Flask(__name__) # had to call it application for elastic beanstalk
 app = application 
-app.config.from_object('config.Configuration')
+#app.config.from_object('config.Configuration')
 
 # instantiate the db wrapper
 db = Database(app)
