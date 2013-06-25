@@ -15,7 +15,7 @@ class Configuration(object):
       DATABASE = {
         'name': 'nucaptcha',
         'engine': 'peewee.MySQLDatabase',
-        'user': 'root',
+        'user': 'root1',
         'host': 'localhost'
       }
     DEBUG = False
