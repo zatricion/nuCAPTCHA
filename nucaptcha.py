@@ -5,9 +5,8 @@ blueprints here too.
 
 then when you want to run your app, you point to main.py or `main.app`
 """
-from flask import Flask
-
-application = Flask(__name__) # had to call it application for elastic beanstalk
+from app import db
+from app import app as application
 
 from auth import *
 from admin import admin
@@ -16,7 +15,7 @@ from models import *
 from views import *
 from scripts import setup
 
-#admin.setup()
+admin.setup()
 # api.setup()
 
 IM_DIR = 'images/'
@@ -24,6 +23,5 @@ SEC_DIR = 'secondary/'
 
 setup.initialize(IM_DIR, SEC_DIR)
 
-# 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
