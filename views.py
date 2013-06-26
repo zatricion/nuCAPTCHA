@@ -8,11 +8,9 @@ from app import app
 from auth import auth
 from models import *
 
-DOMAIN =  'nucaptcha.us/' #'localhost:5000/' #'nucaptcha.us'
+DOMAIN =  'localhost:5000/' #'nucaptcha.us'
 IM_DOMAIN = 'http://' + DOMAIN
-IM_COUNT = 2 # TODO: change to database query
 SEC_DOMAIN = 'http://' + DOMAIN
-SEC_COUNT = 10
 
 ### GET request for actual captcha
 
@@ -30,7 +28,7 @@ def send_captcha():
                  sec_id=y[0].id, sec_url = sec_url)
 
 
-# ADD SECURITY (can just grab images at all domains)
+# TODO: ADD SECURITY (can just grab images at all domains)
 @app.route('/images/<file>')
 def serve_image(file):
   filename = 'images/' + file
@@ -42,11 +40,34 @@ def serve_secondary(file):
   return send_file(filename, mimetype='image/jpeg')
     
 ### POST request with info on the answer they gave
-@app.route("/", methods=["POST"])
+@app.route('/', methods=["POST"])
 def test():
-  return request.data
+  try:
+    req = request.form
+    image_ans = req['image_ans']
+    image_id = req['image_id']
+    sec_ans = req['sec_ans']
+    sec_id = req['sec_id']
+    truth_file = Image.get(Image.id == image_id)
+    with open(truth_file.answer, 'r') as file:
+      image_truth = file.readline().strip()
+    if image_ans == image_truth:
+      sec_update(sec_id, sec_ans)
+      return "True"
+    return "False"
+  except Exception, e:
+    return "{0}".format(e)
     
+def sec_update(sec_id, sec_ans):
+  if sec_ans == "pos":
+    q = Secondary.update(pos_count = Secondary.pos_count + 1).where(Secondary.id == sec_id)
+  elif sec_ans == "neg":
+    q = Secondary.update(neg_count = Secondary.neg_count + 1).where(Secondary.id == sec_id)
+  elif sec_ans == "neut":
+    q = Secondary.update(neut_count = Secondary.neut_count + 1).where(Secondary.id == sec_id)
+  else:
+    raise Exception("Incorrect sentiment value.")
+  q.execute()
 
-
-# TODO: return a Bool <correct> (sometimes require both correct)
+# TODO: (sometimes require both correct)
 # TODO: if <correct> : update database

@@ -20,5 +20,4 @@ class Configuration(object):
         'user': 'root',
         'host': 'localhost'
       }
-    DEBUG = False
-    HOST = '0.0.0.0'
+    DEBUG = True
