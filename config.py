@@ -21,3 +21,4 @@ class Configuration(object):
         'host': 'localhost'
       }
     DEBUG = True
+    SECRET_KEY = 'ae09rjyh5ijjogej-tw4jtogidfjoigj'

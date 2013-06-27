@@ -2,6 +2,7 @@
 views imports app, auth, and models, but none of these import views
 """
 from flask import render_template, json, jsonify, send_file, request
+from forms import ContactForm
 import random
 
 from app import app
@@ -13,19 +14,24 @@ IM_DOMAIN = 'http://' + DOMAIN
 SEC_DOMAIN = 'http://' + DOMAIN
 
 ### GET request for actual captcha
-
-@app.route('/')
-def send_captcha():
-  x = Image.select().order_by(fn.Rand()).limit(1) # pick random image
-  image_url = IM_DOMAIN + x[0].filename
-  
-  y = Secondary.select().order_by(fn.Rand()).limit(1) # pick random secondary
-  sec_url = SEC_DOMAIN + y[0].filename
-
-  # Wrap both image and sentence URLs using jsonify.
-  # Then serve both URLs in JSON format. 
-  return jsonify(image_id=x[0].id, image_url=image_url,
-                 sec_id=y[0].id, sec_url = sec_url)
+@app.route('/',  methods=['GET', 'POST'])
+def contact():
+  if request.method == 'POST':
+    form = ContactForm()
+    return render_template('contact.html', form = form)
+  # 
+# @app.route('/')
+# def send_captcha():
+#   x = Image.select().order_by(fn.Rand()).limit(1) # pick random image
+#   image_url = IM_DOMAIN + x[0].filename
+#   
+#   y = Secondary.select().order_by(fn.Rand()).limit(1) # pick random secondary
+#   sec_url = SEC_DOMAIN + y[0].filename
+# 
+#   # Wrap both image and sentence URLs using jsonify.
+#   # Then serve both URLs in JSON format. 
+#   return jsonify(image_id=x[0].id, image_url=image_url,
+#                  sec_id=y[0].id, sec_url = sec_url)
 
 
 # TODO: ADD SECURITY (can just grab images at all domains)
