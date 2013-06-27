@@ -10,5 +10,5 @@ def initialize(image_dir, sec_dir):
     for file in glob.iglob('{0}*.jpeg'.format(image_dir)):
         Image.create(filename=file, answer=re.sub('jpeg','txt', file))
 
-    for file in glob.iglob('{0}*.jpeg'.format(sec_dir)):
+    for file in glob.iglob('{0}*.jpg'.format(sec_dir)):
         Secondary.create(filename=file)

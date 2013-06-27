@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flask App</title>    
+    <title>nuCAPTCHA</title>
+<!-- Really hacked way of disabling enter key :( -->
+    <script type="text/javascript"> 
+    function stopRKey(evt) { 
+      var evt = (evt) ? evt : ((event) ? event : null); 
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+      if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+    } 
+    document.onkeypress = stopRKey; 
+    </script>    
   </head>
   <body>
    
     <header>
       <div class="container">
-        <h1 class="logo">Flask App</h1>
+        <h1 class="logo">nuCAPTCHA</h1>
       </div>
     </header> 
      
