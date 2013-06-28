@@ -6,7 +6,7 @@ wtforms_json.init()
 class NuCaptchaForm(Form):
   image_id = HiddenField()
   sec_id = HiddenField()
-  word = TextField("Enter the first word here: ")
+  word = TextField("Enter the first word of the captcha: ")
   pos = SubmitField("Positive")
   neg = SubmitField("Negative")
   neut = SubmitField("Neutral")

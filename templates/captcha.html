@@ -6,12 +6,14 @@
     {{ form.hidden_tag() }}
     <img src={{ image | safe }}>
     <img src={{ secondary | safe }}>
+ <ul id="captcha">
+    <li>{{ form.word.label }}</li>
+    <li>{{ form.word}}</li>
  
-    {{ form.word.label }}
-    {{ form.word}}
- 
-    {{ form.pos }}
-    {{ form.neg }}
-    {{ form.neut }}
-  </form>
+    <p> Choose a sentiment for the sentence. </p>
+    <li>{{ form.pos }}
+        {{ form.neg }}
+        {{ form.neut }}</li>
+  </ul>
+</form>
 {% endblock %} 
