@@ -29,6 +29,7 @@ def sec_update(sec_id, req_keys):
 
 def grab_post(req):
   """ Gets a post and validates the answers. """
+  sec_okay = 1
   try:
     image_ans = req['word']
     image_id = req['image_id']
@@ -36,7 +37,10 @@ def grab_post(req):
     truth_file = Image.get(Image.id == image_id)
     with open(truth_file.answer, 'r') as file:
       image_truth = file.readline().strip()
-    if image_ans == image_truth:
+   # s = Secondary.get(Secondary.id == sec_id)
+    #if s.known == 1:
+    #    if s.
+    if (image_ans == image_truth) and (s.known == 1):
       sec_update(sec_id, req.keys())
       return "True"
     return "False"
@@ -61,7 +65,7 @@ def send_captcha():
 
 @app.route('/', methods=['GET', 'POST'])
 def serve():
-  if request.method == 'GET':
+  if  request.method == 'GET':
     default = eval(send_captcha().data)
     form = NuCaptchaForm.from_json(default)
     return render_template('captcha.html', form = form, \
@@ -69,7 +73,6 @@ def serve():
                             secondary = default['sec_url'])
   else:
     req = request.form
-    print req
     return grab_post(req)
   
 # TODO: ADD SECURITY (can just grab images at all domains)
