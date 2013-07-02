@@ -15,17 +15,15 @@ SEC_DOMAIN = 'http://' + DOMAIN
 
 ### Helper Functions ###
 
-def update_known():
-  pass
-#>>> update_query = Tweet.update(is_published=True).where(Tweet.creation_date < today)
-
-#   q = Secondary.update(known = True, ).where(Secondary.pos_count + Secondary.neg_count + Secondary.neut_count 
-#      d = dict(pos = self.pos_count, neg = Secondary.neg_count, neut = Secondary.neut_count)
-#         truth = max(d, key=lambda x: x[1])
-#         total = sum(d.values())
-#         if d[truth] > (0.85 * total) and total > 2:
-#             self.truth = truth
-#             self.known = True
+# def update_known():
+#   pass
+#    q = Secondary.update(known = True, ).where(fn.Sum(Secondary.pos_count, Secondary.neg_count, Secondary.neut_count) > 2)
+#       d = dict(pos = self.pos_count, neg = self.neg_count, neut = self.neut_count)
+#          truth = max(d, key=lambda x: x[1])
+#          total = sum(d.values())
+#          if d[truth] > (0.85 * total) and total > 2:
+#              self.truth = truth
+#              self.known = True
 
         
 def sec_update(sec_id, req_keys):
