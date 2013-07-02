@@ -1,2 +1,3 @@
 #!/bin/bash
-python /var/app/current/wtforms-json-master/setup.py install
+cd /opt/python/ondeck/app/wtforms-json-master
+python setup.py install
