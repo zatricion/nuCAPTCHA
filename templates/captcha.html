@@ -2,7 +2,7 @@
  
 {% block content %}
   <h2></h2>
-  <form action="{{ url_for('serve') }}" method=post>
+  <form action="{{ url_for('serve') }}" method=post id="sentiment">
     {{ form.hidden_tag() }}
     <img src={{ image | safe }}>
     <img src={{ secondary | safe }}>
@@ -10,10 +10,11 @@
     <li>{{ form.word.label }}</li>
     <li>{{ form.word}}</li>
  
-    <p> Choose a sentiment for the sentence. </p>
-    <li>{{ form.pos }}
-        {{ form.neg }}
-        {{ form.neut }}</li>
+    <li><p> Choose a sentiment for the sentence. </p></li>
+    <li> <input id="pos" name="sec_ans" type="submit" value="Positive"> </li>
+    <li> <input id="neg" name="sec_ans" type="submit" value="Negative"> </li>
+    <li> <input id="neut" name="sec_ans" type="submit" value="Neutral"> </li>
+
   </ul>
 </form>
 {% endblock %} 

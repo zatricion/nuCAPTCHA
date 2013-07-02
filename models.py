@@ -48,6 +48,17 @@ class Secondary(db.Model):
     pos_count  = IntegerField(default=0)
     neg_count  = IntegerField(default=0)
     neut_count = IntegerField(default=0)
-    known      = BooleanField(index=True, default=False)
-    truth      = CharField()
+    
+    @property
+    def total(self,):
+      return (self.pos_count + self.neg_count + self.neut_count)
+      
+    @property
+    def truth(self,):
+      d = dict(Positive = self.pos_count, Negative = self.neg_count, Neutral = self.neut_count)
+      truth = max(d, key=lambda x: x[1])
+      return {'word': truth, 'count': d[truth]}
+      
+    def known(self, threshold, percent):
+      return (self.total > threshold and (self.truth['count'] > percent * self.total))
 

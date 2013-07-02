@@ -7,32 +7,21 @@ import random
 
 from app import app
 from auth import auth
-from models import *
+from models import User, Image, Secondary, fn
 
 DOMAIN =  'localhost:5000/' #'nucaptcha.us'
 IM_DOMAIN = 'http://' + DOMAIN
 SEC_DOMAIN = 'http://' + DOMAIN
 
 ### Helper Functions ###
-
-# def update_known():
-#   pass
-#    q = Secondary.update(known = True, ).where(fn.Sum(Secondary.pos_count, Secondary.neg_count, Secondary.neut_count) > 2)
-#       d = dict(pos = self.pos_count, neg = self.neg_count, neut = self.neut_count)
-#          truth = max(d, key=lambda x: x[1])
-#          total = sum(d.values())
-#          if d[truth] > (0.85 * total) and total > 2:
-#              self.truth = truth
-#              self.known = True
-
-        
-def sec_update(sec_id, req_keys):
-  """ Updates the secondary table on reception of a correct post. """
-  if "pos" in req_keys:
+      
+def sec_update(sec_id, sec_ans):
+  """ Updates the secondary table on reception of a correct post. """  
+  if sec_ans == 'Positive':
     q = Secondary.update(pos_count = Secondary.pos_count + 1).where(Secondary.id == sec_id)
-  elif "neg" in req_keys:
+  elif sec_ans == 'Negative':
     q = Secondary.update(neg_count = Secondary.neg_count + 1).where(Secondary.id == sec_id)
-  elif "neut" in req_keys:
+  elif sec_ans == 'Neutral':
     q = Secondary.update(neut_count = Secondary.neut_count + 1).where(Secondary.id == sec_id)
   else:
     raise Exception("Incorrect sentiment value.")
@@ -41,23 +30,29 @@ def sec_update(sec_id, req_keys):
 def grab_post(req):
   """ Gets a post and validates the answers. """
   sec_okay = 1
-  try:
-    image_ans = req['word']
-    image_id = req['image_id']
-    sec_id = req['sec_id']
-    truth_file = Image.get(Image.id == image_id)
-    with open(truth_file.answer, 'r') as file:
-      image_truth = file.readline().strip()
-   # s = Secondary.get(Secondary.id == sec_id)
-    #if s.known == 1:
-    #    if s.
-    if (image_ans == image_truth): # and (s.known == 1):
-      sec_update(sec_id, req.keys())
-      return "True"
-    return "False"
-  except Exception, e:
-    return "{0}".format(e)
-    
+  image_ans = req.get('word', None)
+  image_id = req.get('image_id', None)
+  sec_id = req.get('sec_id', None)
+  sec_ans = req.get('sec_ans', None) 
+  
+  truth_file = Image.get(Image.id == image_id)
+  with open(truth_file.answer, 'r') as file:
+    image_truth = file.readline().strip()
+ 
+  s = Secondary.get(Secondary.id == sec_id)
+  known = s.known(2, 0.85)
+  print s.id
+  print known
+  print s.total
+  print s.truth['word']
+  print s.truth['count']
+  if ((image_ans == image_truth) and
+      (not known or (known and (s.truth['word'] == sec_ans))) ):
+    sec_update(sec_id, sec_ans)    
+    return True
+  else:
+    return False
+ 
 def send_captcha():
   """ Picks a random combination of image and sentence. """
   x = Image.select().order_by(fn.Rand()).limit(1) # pick random image
@@ -74,18 +69,19 @@ def send_captcha():
 
 ### Routing Functions ###
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def serve():
-  if  request.method == 'GET':
     default = eval(send_captcha().data)
     form = NuCaptchaForm.from_json(default)
-    return render_template('captcha.html', form = form, \
-                            image = default['image_url'], \
+    return render_template('captcha.html', form = form,
+                            image = default['image_url'],
                             secondary = default['sec_url'])
-  else:
-    update_known()
+                            
+@app.route('/', methods=['POST'])
+def acquire():
+    #update_known()
     req = request.form
-    return grab_post(req)
+    return str(grab_post(req))
   
 # TODO: ADD SECURITY (can just grab images at all domains)
 @app.route('/images/<file>')
