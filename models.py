@@ -27,12 +27,12 @@ def unique_save(cls = None, column = 'filename'):
 
 
 class User(db.Model, BaseUser):
-    username = CharField()
-    password = CharField()
-    email = CharField()
+    username  = CharField()
+    password  = CharField()
+    email     = CharField()
     join_date = DateTimeField(default=datetime.datetime.now)
-    active = BooleanField(default=True)
-    admin = BooleanField(default=False)
+    active    = BooleanField(default=True)
+    admin     = BooleanField(default=False)
 
     def __unicode__(self):
         return self.username
@@ -44,8 +44,10 @@ class Image(db.Model):
 
 @unique_save
 class Secondary(db.Model):
-    filename = CharField()  
+    filename   = CharField()  
     pos_count  = IntegerField(default=0)
     neg_count  = IntegerField(default=0)
     neut_count = IntegerField(default=0)
     known      = BooleanField(index=True, default=False)
+    truth      = CharField()
+

@@ -15,6 +15,19 @@ SEC_DOMAIN = 'http://' + DOMAIN
 
 ### Helper Functions ###
 
+def update_known():
+  pass
+#>>> update_query = Tweet.update(is_published=True).where(Tweet.creation_date < today)
+
+#   q = Secondary.update(known = True, ).where(Secondary.pos_count + Secondary.neg_count + Secondary.neut_count 
+#      d = dict(pos = self.pos_count, neg = Secondary.neg_count, neut = Secondary.neut_count)
+#         truth = max(d, key=lambda x: x[1])
+#         total = sum(d.values())
+#         if d[truth] > (0.85 * total) and total > 2:
+#             self.truth = truth
+#             self.known = True
+
+        
 def sec_update(sec_id, req_keys):
   """ Updates the secondary table on reception of a correct post. """
   if "pos" in req_keys:
@@ -40,7 +53,7 @@ def grab_post(req):
    # s = Secondary.get(Secondary.id == sec_id)
     #if s.known == 1:
     #    if s.
-    if (image_ans == image_truth) and (s.known == 1):
+    if (image_ans == image_truth): # and (s.known == 1):
       sec_update(sec_id, req.keys())
       return "True"
     return "False"
@@ -72,6 +85,7 @@ def serve():
                             image = default['image_url'], \
                             secondary = default['sec_url'])
   else:
+    update_known()
     req = request.form
     return grab_post(req)
   
