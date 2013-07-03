@@ -16,5 +16,6 @@ h2              { font-size: 1.2em; }
 .flash          { background: #cee5F5; padding: 0.5em;
                   border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; }
-#captcha        {list-style-type: none}
-img             {display: block}
+li              { list-style-type: none }
+fieldset        { border: 0px; display: block; margin: 0px}
+img             { display: inline}
