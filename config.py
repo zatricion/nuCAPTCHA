@@ -12,10 +12,8 @@ class Configuration(object):
         }
     else:
       DATABASE = {
-        'name': 'nucaptcha',
-        'engine': 'peewee.MySQLDatabase',
-        'user': 'root',
-        'host': 'localhost'
+        'name': '/home/ubuntu/test.db',
+        'engine': 'peewee.SqliteDatabase',
       }
     DEBUG = True
     SECRET_KEY = 'ae09rjyh5ijjogej-tw4jtogidfjoigj'
