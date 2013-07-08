@@ -2,8 +2,6 @@
 .DS_Store
 .Python
 *.pyc
-bin/
-include/
-lib/
+v/
 old.ebextensions/
 build/
