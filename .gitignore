@@ -2,6 +2,6 @@
 .DS_Store
 .Python
 *.pyc
-v/
+env/
 old.ebextensions/
 build/
