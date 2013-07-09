@@ -2,6 +2,7 @@
 # git clone https://github.com/zatricion/nuCAPTCHA nucaptcha
 # Setup script for nuCAPTCHA
 
+export DEBIAN_FRONTEND=noninteractive
 # install necessary packages
 sudo apt-get update
 sudo apt-get install -q -y python python-software-properties g++ make
