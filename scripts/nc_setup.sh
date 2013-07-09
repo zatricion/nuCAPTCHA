@@ -12,8 +12,8 @@ sudo apt-get install -q -y libmysqlclient-dev
 ### install nginx
 
 # deal with gpg key
-echo "deb http://nginx.org/packages/ubuntu/ lucid nginx" >> /etc/apt/sources.list.d/nginx-lucid.list
-echo "deb-src http://nginx.org/packages/ubuntu/ lucid nginx" >> /etc/apt/sources.list.d/nginx-lucid.list
+echo "deb http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+echo "deb-src http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
 wget http://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
 rm nginx_signing.key
@@ -43,13 +43,14 @@ sudo useradd -c 'uwsgi user,,,' -g nginx -d /nonexistent -s /bin/false uwsgi
 echo -e 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' | sudo tee -a /etc/init/uwsgi.conf
 
 # change permissions
+# groupadd nginx
 sudo usermod -a -G nginx $USER
 sudo chown -R $USER:nginx $HOME/nucaptcha
 sudo chmod -R g+w $HOME/nucaptcha
 
 # configure nginx
 sudo rm /etc/nginx/conf.d/default.conf
-sudo mv $HOME/nucaptcha/scripts/nginx.conf /etc/nginx/conf.d/nucaptcha.conf
+sudo cp $HOME/nucaptcha/scripts/nginx.conf /etc/nginx/conf.d/nucaptcha.conf
 
 # create nucaptcha database
 mysql -u root -e "create database nucaptcha"
