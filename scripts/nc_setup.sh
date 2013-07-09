@@ -12,10 +12,17 @@ sudo apt-get install -q -y libmysqlclient-dev
 ### install nginx
 
 # deal with gpg key
-check = `tail -n 1  /etc/apt/sources.list.d/nginx-lucid.list`
-if "$check" != "deb-src http://nginx.org/packages/ubuntu/ lucid nginx"; then 
-    echo "deb http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
-    echo "deb-src http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+deb = "deb http://nginx.org/packages/ubuntu/ lucid nginx"
+debSrc = "deb-src http://nginx.org/packages/ubuntu/ lucid nginx"
+
+# if the file doesn't exist, write it, otherwise make sure the last line isn't
+# already what we want and append to it
+if [ ! -a /etc/apt/sources.list.d/nginx-lucid.list ]; then
+    echo "$deb" | sudo tee /etc/apt/sources.list.d/nginx-lucid.list
+    echo "$debSrc" | sudo tee /etc/apt/sources.list.d/nginx-lucid.list
+elif `tail -n 1  /etc/apt/sources.list.d/nginx-lucid.list`!= "$debSrc"; then 
+    echo "$deb" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+    echo "$debSrc" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
 fi
 
 wget http://nginx.org/keys/nginx_signing.key
