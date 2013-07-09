@@ -2,7 +2,6 @@
 # git clone https://github.com/zatricion/nuCAPTCHA nucaptcha
 # Setup script for nuCAPTCHA
 
-export DEBIAN_FRONTEND=noninteractive
 # install necessary packages
 sudo apt-get update
 sudo apt-get install -q -y python python-software-properties g++ make
@@ -30,13 +29,17 @@ pip install -r requirements.txt
 cd ~
 sudo mkdir -p /var/www/run
 sudo cp -R nucaptcha /var/www/nucaptcha
+
+sudo groupadd nginx
+sudo usermod -a -G nginx nginx
 sudo chown -R nginx:nginx /var/www/
+
 sudo mkdir -p /var/log/uwsgi
 sudo mkdir -p /etc/uwsgi/apps-available
 sudo mkdir -p /etc/uwsgi/apps-enabled
 sudo cp ~/nucaptcha/scripts/uwsgi.conf /etc/init/uwsgi.conf
 sudo cp ~/nucaptcha/scripts/nucaptcha.ini /etc/uwsgi/apps-available/nucaptcha.ini
-sudo ln -s /etc/uwsgi/apps-available/blog.ini /etc/uwsgi/apps-enabled/blog.ini
+sudo ln -s /etc/uwsgi/apps-available/nucaptcha.ini /etc/uwsgi/apps-enabled/nucaptcha.ini
 sudo cp ~/nucaptcha/scripts/default.conf /etc/nginx/conf.d/default.conf
 
 # create nucaptcha database
