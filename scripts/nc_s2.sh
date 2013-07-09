@@ -34,12 +34,9 @@ sudo mkdir -p /var/log/uwsgi
 sudo mkdir -p /etc/uwsgi/apps-available
 sudo mkdir -p /etc/uwsgi/apps-enabled
 sudo cp ~/nucaptcha/scripts/uwsgi.conf /etc/init/uwsgi.conf
-sudo touch /etc/init/uwsgi.conf
 sudo cp ~/nucaptcha/scripts/nucaptcha.ini /etc/uwsgi/apps-available/nucaptcha.ini
-sudo touch /etc/uwsgi/apps-available/blog.ini
 sudo ln -s /etc/uwsgi/apps-available/blog.ini /etc/uwsgi/apps-enabled/blog.ini
 sudo cp ~/nucaptcha/scripts/default.conf /etc/nginx/conf.d/default.conf
-sudo touch /etc/nginx/conf.d/default.conf
 
 # create nucaptcha database
 mysql -u root -e "create database nucaptcha"
