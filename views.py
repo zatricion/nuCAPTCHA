@@ -9,7 +9,7 @@ from app import app
 from auth import auth
 from models import User, Image, Secondary, fn
 
-DOMAIN =  'localhost:5000/' #'nucaptcha.us'
+DOMAIN =  'nucaptcha.us:5000'
 IM_DOMAIN = 'http://' + DOMAIN
 SEC_DOMAIN = 'http://' + DOMAIN
 
