@@ -54,6 +54,7 @@ sudo useradd -c 'uwsgi user,,,' -g nginx -d /nonexistent -s /bin/false uwsgi
 echo -e 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' | sudo tee /etc/init/uwsgi.conf
 
 # change permissions
+sudo groupadd nginx
 sudo usermod -a -G nginx $USER
 sudo chown -R $USER:nginx $HOME/nucaptcha
 sudo chmod -R g+w $HOME/nucaptcha
