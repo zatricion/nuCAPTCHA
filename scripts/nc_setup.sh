@@ -12,8 +12,12 @@ sudo apt-get install -q -y libmysqlclient-dev
 ### install nginx
 
 # deal with gpg key
-echo "deb http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
-echo "deb-src http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+check = `tail -n 1  /etc/apt/sources.list.d/nginx-lucid.list`
+if "$check" != "deb-src http://nginx.org/packages/ubuntu/ lucid nginx"; then 
+    echo "deb http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+    echo "deb-src http://nginx.org/packages/ubuntu/ lucid nginx" | sudo tee -a /etc/apt/sources.list.d/nginx-lucid.list
+fi
+
 wget http://nginx.org/keys/nginx_signing.key
 sudo apt-key add nginx_signing.key
 rm nginx_signing.key
@@ -22,7 +26,7 @@ rm nginx_signing.key
 sudo apt-get install -q -y nginx
 
 # create a virtual environment and source it
-cd nucaptcha
+cd $HOME/nucaptcha
 virtualenv env
 source env/bin/activate
 
@@ -40,10 +44,9 @@ pip install -r requirements.txt
 sudo useradd -c 'uwsgi user,,,' -g nginx -d /nonexistent -s /bin/false uwsgi
 
 # run uwsgi in the background
-echo -e 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' | sudo tee -a /etc/init/uwsgi.conf
+echo -e 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' | sudo tee /etc/init/uwsgi.conf
 
 # change permissions
-# groupadd nginx
 sudo usermod -a -G nginx $USER
 sudo chown -R $USER:nginx $HOME/nucaptcha
 sudo chmod -R g+w $HOME/nucaptcha

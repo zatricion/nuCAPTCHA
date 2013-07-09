@@ -5,3 +5,5 @@
 env/
 old.ebextensions/
 build/
+scripts/__init__.pyc
+scripts/setup.pyc
