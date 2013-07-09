@@ -12,8 +12,8 @@ sudo apt-get install -q -y libmysqlclient-dev
 ### install nginx
 
 # deal with gpg key
-deb = "deb http://nginx.org/packages/ubuntu/ lucid nginx"
-debSrc = "deb-src http://nginx.org/packages/ubuntu/ lucid nginx"
+deb="deb http://nginx.org/packages/ubuntu/ lucid nginx"
+debSrc="deb-src http://nginx.org/packages/ubuntu/ lucid nginx"
 
 # if the file doesn't exist, write it, otherwise make sure the last line isn't
 # already what we want and append to it
