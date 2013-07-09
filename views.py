@@ -41,11 +41,6 @@ def grab_post(req):
  
   s = Secondary.get(Secondary.id == sec_id)
   known = s.known(2, 0.85)
-  print s.id
-  print known
-  print s.total
-  print s.truth['word']
-  print s.truth['count']
   if ((image_ans == image_truth) and
       (not known or (known and (s.truth['word'] == sec_ans))) ):
     sec_update(sec_id, sec_ans)    
