@@ -23,8 +23,8 @@ sudo apt-get install -q -y nginx
 
 # create a virtual environment and source it
 cd nucaptcha
-virtualenv v
-source v/bin/activate
+virtualenv env
+source env/bin/activate
 
 # install non-pip library
 cd wtforms-json-master
@@ -50,7 +50,7 @@ sudo chmod -R g+w $HOME/nucaptcha
 
 # configure nginx
 sudo rm /etc/nginx/conf.d/default.conf
-
+mv $HOME/nucaptcha/scripts/nginx.conf /etc/nginx/conf.d/nucaptcha.conf
 
 # create nucaptcha database
 mysql -u root -e "create database nucaptcha"
@@ -63,3 +63,6 @@ fi
 
 cp  ~/nucaptcha/scripts/.vimrc ~/.vimrc
 
+### Start website
+sudo service uwsgi restart
+sudo service nginx restart
