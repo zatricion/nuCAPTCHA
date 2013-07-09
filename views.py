@@ -58,7 +58,7 @@ def send_captcha():
   x = Image.select().order_by(fn.Rand()).limit(1) # pick random image
   image_url = IM_DOMAIN + x[0].filename
   
-  y = Secondary.select().order_by(fn.Rand()).limit(1) # pick random secondary
+    y = Secondary.select().order_by(fn.Rand()).limit(1) # pick random secondary
   sec_url = SEC_DOMAIN + y[0].filename
 
   # Wrap both image and sentence URLs using jsonify.
