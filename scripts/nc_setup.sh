@@ -40,7 +40,7 @@ pip install -r requirements.txt
 sudo useradd -c 'uwsgi user,,,' -g nginx -d /nonexistent -s /bin/false uwsgi
 
 # run uwsgi in the background
-sudo echo 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' >> /etc/init/uwsgi.conf
+echo -e 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' | sudo tee -a /etc/init/uwsgi.conf
 
 # change permissions
 sudo usermod -a -G nginx $USER
