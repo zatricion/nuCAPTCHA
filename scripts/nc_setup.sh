@@ -4,14 +4,13 @@
 
 # install necessary packages
 sudo apt-get update
-sudo apt-get install -y python python-software-properties g++ make
-sudo apt-get install -y python-dev python-virtualenv
-sudo apt-get install -y mysql-server
-
-# clone the directory as nucaptcha
-cd nucaptcha
+sudo apt-get install -q -y python python-software-properties g++ make
+sudo apt-get install -q -y python-dev python-virtualenv
+sudo apt-get install -q -y mysql-server
+sudo apt-get install -q -y libmysqlclient-dev
 
 # create a virtual environment and source it
+cd nucaptcha
 virtualenv v
 source v/bin/activate
 
@@ -21,6 +20,9 @@ python setup.py install
 
 cd ..
 pip install -r requirements.txt
+
+# create nucaptcha database
+mysql -u root -e "create database nucaptcha"
 
 # set up vim the way I like it, move any existing to old
 cd $HOME
