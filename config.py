@@ -20,5 +20,5 @@ class Configuration(object):
 #        'name': '/home/ubuntu/test.db',
 #        'engine': 'peewee.SqliteDatabase',
       }
-    DEBUG = True
+    DEBUG = False
     SECRET_KEY = 'ae09rjyh5ijjogej-tw4jtogidfjoigj'
