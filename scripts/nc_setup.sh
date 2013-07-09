@@ -40,17 +40,16 @@ pip install -r requirements.txt
 sudo useradd -c 'uwsgi user,,,' -g nginx -d /nonexistent -s /bin/false uwsgi
 
 # run uwsgi in the background
-echo 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' >> /etc/init/uwsgi.conf
+sudo echo 'description "uWSGI"\nstart on runlevel [2345]\nstop on runlevel [06]\n\nrespawn\n\nexec uwsgi --master --processes 4 --die-on-term --uid uwsgi --gid nginx --socket /tmp/uwsgi.sock --chmod-socket 660 --no-site --vhost --logto /var/log/uwsgi.log' >> /etc/init/uwsgi.conf
 
 # change permissions
-USER = 'michael'
 sudo usermod -a -G nginx $USER
 sudo chown -R $USER:nginx $HOME/nucaptcha
 sudo chmod -R g+w $HOME/nucaptcha
 
 # configure nginx
 sudo rm /etc/nginx/conf.d/default.conf
-mv $HOME/nucaptcha/scripts/nginx.conf /etc/nginx/conf.d/nucaptcha.conf
+sudo mv $HOME/nucaptcha/scripts/nginx.conf /etc/nginx/conf.d/nucaptcha.conf
 
 # create nucaptcha database
 mysql -u root -e "create database nucaptcha"
