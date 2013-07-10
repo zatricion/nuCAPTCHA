@@ -9,9 +9,8 @@ On an AWS ubuntu instance:
 * cd nucaptcha
 * chmod 777 scripts/nginx_setup.sh
 * ./scripts/nginx_setup.sh
-* source env/bin/activate
-* python nucaptcha.py
 
+Just hit return when mysql asks for root passwords.
 
 Local setup:
 
