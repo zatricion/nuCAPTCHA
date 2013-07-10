@@ -1,7 +1,7 @@
 nuCAPTCHA
 ================================
 
-Use the local branch to run locally. Otherwise check out nucaptcha.us:5000
+Check out https://www.nucaptcha.us.
 
 On an AWS ubuntu instance:
 * sudo apt-get install -y git
@@ -14,6 +14,8 @@ On an AWS ubuntu instance:
 
 
 Local setup:
+
+Use the local branch.
 
 Install mysql and create a database called nucaptcha.
 
