@@ -2,14 +2,14 @@
 # git clone https://github.com/zatricion/nuCAPTCHA nucaptcha
 # Setup script for nuCAPTCHA
 
-# ensure that mysql install runs without user input
-export DEBIAN_FRONTEND=noninteractive
 
 # install necessary packages
 sudo apt-get update
 sudo apt-get install -q -y python python-software-properties g++ make
 sudo apt-get install -q -y python-dev python-virtualenv build-essential python-pip
-sudo apt-get install -q -y mysql-server
+
+# ensure that mysql install runs without user input
+sudo export DEBIAN_FRONTEND=noninteractive apt-get install -q -y mysql-server
 sudo apt-get install -q -y libmysqlclient-dev
 
 # create a virtual environment and source it
