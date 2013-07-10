@@ -31,6 +31,7 @@ sudo mkdir -p /var/www/run
 sudo cp -R nucaptcha /var/www/nucaptcha
 
 sudo groupadd nginx
+sudo useradd nginx -g nginx
 sudo usermod -a -G nginx nginx
 sudo chown -R nginx:nginx /var/www/
 
