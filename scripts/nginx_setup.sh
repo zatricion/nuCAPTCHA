@@ -9,7 +9,10 @@ sudo apt-get install -q -y python python-software-properties g++ nginx make
 sudo apt-get install -q -y python-dev python-virtualenv build-essential python-pip
 
 # ensure that mysql install runs without user input
-sudo apt-get install -qq -y mysql-server
+# sudo debconf-set-selections <<< 'mysql-server-5.1 mysql-server/root_password password '
+# sudo debconf-set-selections <<< 'mysql-server-5.1 mysql-server/root_password_again password '
+# sudo debconf-set-selections <<< 'libmysqlclient-dev mysql-server/root_password password '
+sudo apt-get install -q -y mysql-server
 sudo apt-get install -q -y libmysqlclient-dev
 
 # create a virtual environment and source it
@@ -44,5 +47,6 @@ sudo rm /etc/nginx/sites-available/default
 sudo rm /etc/nginx/sites-enabled/default
 sudo cp $HOME/nucaptcha/scripts/default.txt /etc/nginx/sites-available/default
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx reload
 
+python ~/nucaptcha/nucaptcha.py;
+sudo service nginx reload
