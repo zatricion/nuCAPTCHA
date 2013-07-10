@@ -7,8 +7,8 @@ On an AWS ubuntu instance:
 * sudo apt-get install -y git
 * git clone https://github.com/zatricion/nuCAPTCHA nucaptcha
 * cd nucaptcha
-* chmod 777 scripts/flask_setup.sh
-* ./scripts/flask_setup.sh
+* chmod 777 scripts/nginx_setup.sh
+* ./scripts/nginx_setup.sh
 * source env/bin/activate
 * python nucaptcha.py
 

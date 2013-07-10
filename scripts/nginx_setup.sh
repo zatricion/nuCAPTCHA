@@ -9,7 +9,7 @@ sudo apt-get install -q -y python python-software-properties g++ nginx make
 sudo apt-get install -q -y python-dev python-virtualenv build-essential python-pip
 
 # ensure that mysql install runs without user input
-sudo export DEBIAN_FRONTEND=noninteractive apt-get install -q -y mysql-server
+sudo apt-get install -qq -y mysql-server
 sudo apt-get install -q -y libmysqlclient-dev
 
 # create a virtual environment and source it
