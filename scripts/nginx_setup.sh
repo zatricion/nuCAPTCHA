@@ -48,5 +48,5 @@ sudo rm /etc/nginx/sites-enabled/default
 sudo cp $HOME/nucaptcha/scripts/default.txt /etc/nginx/sites-available/default
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-python ~/nucaptcha/nucaptcha.py;
+python ~/nucaptcha/nucaptcha.py
 sudo service nginx reload
